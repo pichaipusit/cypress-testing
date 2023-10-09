@@ -6,6 +6,11 @@ class ProductPage {
     searchBtn: () => cy.get("#submit_search"),
     productNames: () =>
       cy.get(".product-image-wrapper .single-products .productinfo p"),
+    secondProduct: () => cy.get(".single-products").eq(1),
+    productAddModal: () => cy.get(".modal-content"),
+    modalTitle: () => cy.get(".modal-title"),
+    viewCartBtn: () => cy.get("u"),
+    continueBtn: () => cy.get(".modal-footer > .btn"),
   };
 
   visit() {
@@ -35,6 +40,34 @@ class ProductPage {
 
   noProductFound() {
     this.element.productNames().should("not.exist");
+  }
+
+  addtoCart() {
+    this.element
+      .secondProduct()
+      .trigger("mouseover")
+      .then(() => {
+        cy.get(".product-overlay a[data-product-id='2']").click({
+          force: true,
+        });
+      });
+  }
+
+  isAddModalVisible(msg) {
+    this.element
+      .productAddModal()
+      .should("be.visible")
+      .then(() => {
+        this.element.modalTitle().invoke("text").should("contain", msg);
+      });
+  }
+
+  continueShop() {
+    this.element.continueBtn().click();
+  }
+
+  viewCart() {
+    this.element.viewCartBtn().click();
   }
 }
 module.exports = new ProductPage();
