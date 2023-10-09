@@ -8,6 +8,10 @@ class ProductPage {
       cy.get(".product-image-wrapper .single-products .productinfo p"),
   };
 
+  visit() {
+    cy.visit("https://automationexercise.com/products");
+  }
+
   typeProductName(name) {
     this.element.searchInput().type(name);
   }
@@ -27,6 +31,10 @@ class ProductPage {
         );
         expect(hasWordBlue).to.be.true;
       });
+  }
+
+  noProductFound() {
+    this.element.productNames().should("not.exist");
   }
 }
 module.exports = new ProductPage();
