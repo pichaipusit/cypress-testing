@@ -9,4 +9,6 @@ npm i
  ```javascript
 npx cypress open
 ```
-Choose a file feature you want to test
+Choose the feature you want to run test
+
+![Uploading Screen Shot 2566-10-10 at 10.39.18.png…]()
